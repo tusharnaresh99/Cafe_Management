@@ -1,0 +1,54 @@
+
+print("----Welcome To Monk's Cafe----")
+choice = input("Would you like to place an 'order' or make a 'booking'? ")
+menu = {"Maggie": 40, "Momos": 50, "Golgappe": 60, "Pizza": 120}
+
+def total_bill(item, quantity):
+    if item == "Maggie":
+        return 40 * quantity
+    elif item == "Momos":
+        return 50 * quantity
+    elif item == "Golgappe":
+        return 35 * quantity
+    elif item == "Pizza":
+        return 120 * quantity
+    else:
+        return 0
+
+if choice == 'order':
+    orders = {}
+    while True:
+        print(menu)
+        item = input("Enter the item you'd like to order (or type 'done' to finish): ")
+
+        if item == 'done':
+            print("Thank you for your order!")
+            break
+
+        if item in menu:
+            quantity = int(input(f"Enter quantity for {item}: "))
+            if item in orders:
+                orders[item] += quantity
+            else:
+                orders[item] = quantity
+            print(f"Your current order: {orders}")
+        else:
+            print("Invalid item selected. Please select an item from the menu.")
+    
+    total = 0
+    for item, quantity in orders.items():
+        total += total_bill(item, quantity)
+    
+    print("\nSummary of your order:")
+    for item, quantity in orders.items():
+        print(f"{item} x{quantity} - {total_bill(item, quantity)}")
+    
+    print(f"\nTotal bill: {total}")
+elif choice == 'booking':
+    name = input("Please enter your name: ")
+    capacity = input("For how many persons do you want to book a table? ")
+    time = input("Please enter the time (between 10:00-22:00) for your booking: ")
+    print(f"Thank you {name}! Your table for {capacity} persons has been booked for {time}.")
+
+else:
+    print("Invalid entry. Type carefully. It's a case-sensitive language.")
